@@ -15,7 +15,7 @@ function App() {
 
   const loadHistory = useCallback(async () => {
   try {
-    const res = await api.get("/api/chat/history");
+    const res = await api.get(`${API_BASE_URL}/api/chat/history`);
 
     setMessages(Array.isArray(res.data) ? res.data : []);
   } catch (err) {
@@ -26,7 +26,7 @@ function App() {
 
   const checkUser = useCallback(async () => {
     try {
-      const res = await api.get("/api/auth/me");
+      const res = await api.get(`${API_BASE_URL}/api/auth/me`);
 
       if (res.data) {
         setUser(res.data);
