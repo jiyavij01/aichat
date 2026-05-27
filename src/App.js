@@ -15,7 +15,7 @@ function App() {
 
   const loadHistory = useCallback(async () => {
   try {
-    const res = await api.get(`${API_BASE_URL}/api/chat/history`);
+    const res = await api.get("/api/chat/history");
 
     setMessages(Array.isArray(res.data) ? res.data : []);
   } catch (err) {
@@ -26,7 +26,7 @@ function App() {
 
   const checkUser = useCallback(async () => {
     try {
-      const res = await api.get(`${API_BASE_URL}/api/auth/me`);
+      const res = await api.get("/api/auth/me");
 
       if (res.data) {
         setUser(res.data);
@@ -61,7 +61,7 @@ function App() {
     formData.append("password", password);
 
     try {
-      await api.post(`${API_BASE_URL}/api/auth/login`, formData, {
+      await api.post("/api/auth/login", formData, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         withCredentials: true,
       });
@@ -77,7 +77,7 @@ function App() {
   };
 
   const logout = async () => {
-    await api.post(`${API_BASE_URL}/api/auth/logout`);
+    await api.post("/api/auth/logout");
     setUser(null);
     setMessages([]);
   };
@@ -93,7 +93,7 @@ function App() {
       { role: "user", content: userText },
     ]);
 
-    const res = await api.post(`${API_BASE_URL}/api/chat/response`, {
+    const res = await api.post("/api/chat/response", {
       message: userText,
     });
 
