@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE_URL = "http://chat-production-bbf4.up.railway.app";
+export const API_BASE_URL = "https://chat-production-bbf4.up.railway.app";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
