@@ -14,9 +14,15 @@ function App() {
   const [error, setError] = useState("");
 
   const loadHistory = useCallback(async () => {
+  try {
     const res = await api.get(`${API_BASE_URL}/api/chat/history`);
-    setMessages(res.data);
-  }, []);
+
+    setMessages(Array.isArray(res.data) ? res.data : []);
+  } catch (err) {
+    console.error(err);
+    setMessages([]);
+  }
+}, []);
 
   const checkUser = useCallback(async () => {
     try {
@@ -140,7 +146,7 @@ function App() {
 
       <div className="chat-area">
         <div className="messages">
-          {messages.map((msg, index) => (
+          {Array.isArray(messages) && messages.map((msg, index) => (
             <div key={index} className={`message ${msg.role}`}>
               <b>{msg.role === "user" ? "You" : "AI"}</b>
               <p>{msg.content}</p>
