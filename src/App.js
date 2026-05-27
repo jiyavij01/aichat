@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import api, { API_BASE_URL } from "./api";
+import api from "./api";
 import "./App.css";
 
 function App() {
