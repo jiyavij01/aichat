@@ -15,7 +15,7 @@ function App() {
 
   const loadHistory = useCallback(async () => {
   try {
-    const res = await api.get(`${API_BASE_URL}/api/chat/history`);
+    const res = await api.get("/api/chat/history");
 
     setMessages(Array.isArray(res.data) ? res.data : []);
   } catch (err) {
@@ -26,7 +26,7 @@ function App() {
 
   const checkUser = useCallback(async () => {
     try {
-      const res = await api.get(`${API_BASE_URL}/api/auth/me`);
+      const res = await api.get("/api/auth/me");
 
       if (res.data) {
         setUser(res.data);
@@ -45,7 +45,7 @@ function App() {
     setError("");
 
     try {
-      await api.post(`${API_BASE_URL}/api/auth/register`, { username, password });
+      await api.post("/api/auth/register", { username, password });
       alert("Registered. Now login.");
       setIsRegister(false);
     } catch (err) {
